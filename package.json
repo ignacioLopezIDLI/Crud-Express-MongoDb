@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/index.js"
-  },
+    "dev": "nodemon --exec babel-node src/index.js",
+    "dev1": "nodemon --exec babel-node --extensions .js,.mjs src/index.js"
+  },  
   "keywords": [],
   "author": "ignacioLopezIDLI",
   "license": "ISC",
