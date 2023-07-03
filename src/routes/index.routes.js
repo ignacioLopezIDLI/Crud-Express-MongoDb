@@ -1,46 +1,28 @@
 import { Router } from "express"
-import Task from "../models/Task"
+import { createTask, deleteTask, renderTask, renderTaskEdit, updateDoneTask, updateTask } from "../controllers/task.controller"
+
 const router = Router() 
 
-// Ruta GET
-router.get("/",async(req,res)=>{
-    const tasks = await Task.find().lean() // .lean() Transforma objetos de MongoDB a objetos js
-
-    res.render("index",{tasks : tasks}) // Da info de BD para renderizar 
-})
+// Ruta GET  Traer Tareas
+router.get("/",renderTask)
 
 
-// Ruta POST
-router.post("/tasks/add",async (req,res)=>{
-    try {
-        const task = Task(req.body)
-        await task.save()
-        res.redirect("/")
-    } catch (error) {
-        console.log(error);
-    }
-    
-})
+// Ruta POST Hacer tareas
+router.post("/tasks/add",createTask)
 
 
-router.get("/about",(req,res)=>{
-    res.render("about")
-})
+// Editar 1 Buscar info 
+router.get("/edit/:id", renderTaskEdit)
 
-router.get("/edit/:id", async (req,res)=>{
-    try {
-        const task = await Task.findById(req.params.id).lean() // Busca Tarea x ID 
-        res.render("edit", {task})   // Pasa la info buscada 
-    } catch (error) {
-        console.log(error.message);
-    }
-})
+// Editar 2 Guardar info
+router.post("/edit/:id", updateTask)
 
-router.post("/edit/:id", async (req,res)=>{
-    const { id } = req.params
-    await Task.findByIdAndUpdate(id, req.body)
-    res.redirect("/")
-})
+// Eliminar 
+router.get("/delete/:id", deleteTask)
+
+// Cambiar estado de Tareas
+
+router.get("/toggleDone/:id",updateDoneTask )
 
 
 export default router
