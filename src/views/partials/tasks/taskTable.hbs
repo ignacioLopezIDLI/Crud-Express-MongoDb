@@ -16,12 +16,12 @@
             <td>{{description}} </td>
             <td>
                 {{#if done}}    
-                    <a href="/toggleDone/{{_id}}">Pendiente</a>
+                    <a href="/tasks/{{_id}}/toggleDone">Pendiente</a>
                 {{else}}
-                    <a href="/toggleDone/{{_id}}">Listo</a>
+                    <a href="/tasks/{{_id}}/toggleDone">Listo</a>
                 {{/if}}
-                <a href="/delete/{{_id}}">Eliminar</a>
-                <a href="/edit/{{_id}}">Actualizar</a>
+                <a href="/tasks/{{_id}}/delete">Eliminar</a>
+                <a href="/tasks/{{_id}}/edit">Actualizar</a>
             </td>
         </tr>
         
