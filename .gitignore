@@ -1,2 +1,6 @@
+# Archivos de NodeJS
 node_modules
+# Variables de Entorno
 .env
+# Carpeta de Produccion
+dist

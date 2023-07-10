@@ -28,6 +28,10 @@ app.use(express.urlencoded({extended: false})) // Permite usar elementos del req
 
 // Rutas
 app.use(indexRoutes);
+
+// Archivos estaticos
+
+app.use(express.static(path.join(__dirname,"public")))
  
 export default app;
 
