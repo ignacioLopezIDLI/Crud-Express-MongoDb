@@ -1,10 +1,12 @@
 // Importaciones
 import express from 'express';
 import indexRoutes from './routes/index.routes'
+import authRoutes from "./routes/auth.routes"
 import exphbs from 'express-handlebars'
 import path from 'path'
 import { create } from 'express-handlebars';
 import morgan from "morgan"
+
 
 // Inicializo APP 
 const app = express();
@@ -27,7 +29,8 @@ app.use(morgan("dev")) // Ver Peticiones
 app.use(express.urlencoded({extended: false})) // Permite usar elementos del req.body 
 
 // Rutas
-app.use(indexRoutes);
+app.use(indexRoutes)
+app.use("/auth", authRoutes)
 
 // Archivos estaticos
 
