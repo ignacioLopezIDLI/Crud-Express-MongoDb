@@ -47,7 +47,7 @@ export const signin = async (req,res) =>{
     if (!matchPassword) return res.status(401).json({token:null, message:"Contraseña Invalida"}) 
  
     const token =  jwt.sign({id:userfound._id}, SECRET,{
-        expiresIn: 86400
+        expiresIn: 86400    
     })
 
     res.json({token})
