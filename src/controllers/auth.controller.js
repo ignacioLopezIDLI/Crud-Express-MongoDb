@@ -3,6 +3,7 @@ import {SECRET} from "../config"
 import jwt  from "jsonwebtoken"
 import Role from "../models/Role"
 
+// Registrar user
 export const signup = async (req,res) =>{
     const {username, email , password , roles} = req.body
     
@@ -34,7 +35,7 @@ export const signup = async (req,res) =>{
     res.status(200).json({token})
 }
 
-
+// Login user
 export const signin = async (req,res) =>{
 
     const userfound =  await User.findOne({email:req.body.email}).populate("roles") // Consulto Email BD

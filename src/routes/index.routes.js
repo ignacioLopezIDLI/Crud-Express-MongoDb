@@ -1,22 +1,22 @@
 import { Router } from "express"    
 import { createTask, deleteTask, renderTask, renderTaskEdit, updateDoneTask, updateTask } from "../controllers/task.controller"
-import { verifyToken } from "../middlewares"
+import { authJwt, verifyToken } from "../middlewares"
 const router = Router() 
 
 // Ruta GET  Traer Tareas
 router.get("/",renderTask)
 
 // Ruta POST Hacer tareas
-router.post("/tasks/add",verifyToken,createTask)
+router.post("/tasks/add",createTask)
 
 // Editar 1 Buscar info 
-router.get("/tasks/:id/edit", renderTaskEdit)
+router.get("/tasks/:id/edit",authJwt.verifyToken, renderTaskEdit)
 
 // Editar 2 Guardar info
-router.post("/tasks/:id/edit", updateTask)
+router.post("/tasks/:id/edit",authJwt.verifyToken, updateTask)
 
 // Eliminar 
-router.get("/tasks/:id/delete",verifyToken, deleteTask)
+router.get("/tasks/:id/delete",[authJwt.verifyToken,authJwt.isAdmin], deleteTask)
 
 // Cambiar estado de Tareas
 

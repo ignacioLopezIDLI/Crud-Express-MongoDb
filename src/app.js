@@ -7,6 +7,7 @@ import path from 'path'
 import { createRoles } from './libs/initialSetup';
 import { create } from 'express-handlebars';
 import morgan from "morgan"
+import userRoutes from "./routes/user.routes"
 
 
 // Inicializo APP 
@@ -34,6 +35,7 @@ app.use(express.json()) // Analizar el cuerpo de la solicitud en formato JSON
 // Rutas
 app.use(indexRoutes)
 app.use("/auth", authRoutes)
+app.use("/user",userRoutes)
 
 // Archivos estaticos
 
