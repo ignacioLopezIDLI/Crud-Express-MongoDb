@@ -21,8 +21,14 @@ var hbs = create({
     layoutsDir: path.join(app.get("views"), "layouts"),
     defaultLayout: "main",
     extname: ".hbs",
+    helpers: {
+        formatDate: function (date) {
+            return new Date(date).toLocaleDateString() // Ajusta el formato como necesites
+        }
+    }
 })
 
+// Handlebars
 app.engine(".hbs",hbs.engine);
 
 app.set("view engine", ".hbs");

@@ -1,0 +1,46 @@
+{{#if user}}
+    <table class="table table-bordered table-hover table-dark">
+    <thead>
+        <tr>
+            <th>N.</th>
+            <th>Usuario</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Creado</th>
+            <th>Funciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each user}}
+        <tr>
+            <td>{{@index}} </td>
+            <td>{{username}} </td>
+            <td>{{email}} </td>
+            <td>
+                {{#each roles}}
+                    {{this.name}}
+                    {{#unless @last}}, {{/unless}} <!-- Agrega una coma entre roles, excepto para el último -->
+                {{/each}}
+            </td>
+            <td>{{formatDate createdAt}}</td>
+            <td>
+                <div class="d-flex">
+                    <a href="/tasks/{{_id}}/delete" class="btn btn-danger me-2">Eliminar</a>
+                    <a href="/tasks/{{_id}}/edit" class="btn btn-info">Actualizar</a>
+                </div>
+            </td>
+        </tr>
+        
+    {{/each}}
+
+    </tbody>
+</table>
+    {{else}}    
+        <div class="h-100 d-flex align-items justify-content-center">
+            <div class="text-center text-white">
+            <h1>Sin Tareas</h1>
+            <img src="/icons/lapiz.png" style="width: 160px; height: auto;" > 
+            </div>
+        </div>
+        {{/if}}                                                                                                 
