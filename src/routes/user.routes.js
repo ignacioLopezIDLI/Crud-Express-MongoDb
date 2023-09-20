@@ -18,4 +18,8 @@ router.post("/",[
 router.get("/",userCtrl.renderUser)
 
 
+// Ruta Eliminar Usuario 
+router.get("/:id/delete",userCtrl.deleteUser)
+
+
 export default router
