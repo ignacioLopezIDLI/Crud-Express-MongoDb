@@ -38,3 +38,24 @@ export const deleteUser = async (req,res)=>{
         console.log(error)
     }
 }
+
+
+// Ruta Para Actulizar user
+
+// Editar 1 Render Task Edit 
+
+export const renderUserEdit = async (req,res)=>{
+    try {
+        const user = await User.findById(req.params.id).lean() // Busca User x ID 
+        res.render("editUser", {user})   // Pasa la info buscada 
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+// Editar 2 Guardar info
+export const updateUser = async (req,res)=>{
+    const { id } = req.params
+    await User.findByIdAndUpdate(id, req.body)
+    res.redirect("/user")
+}

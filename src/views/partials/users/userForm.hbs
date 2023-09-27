@@ -1,0 +1,36 @@
+<div class="card card-body p-4 rounded-0 bg-dark text-white">
+
+    <h3>Crear Usuario</h3>
+
+      <form action="/user/signup" method="POST">
+
+      <div>
+        <label for="title">Escribe un Username:</label>
+        <input type="text" name="username" placeholder="Username" id="username" class="form-control rounded-0 bg-dark text-white"/>
+      </div>
+
+      <div>
+        <label for="title">Escribe un Email:</label>
+        <input type="text" name="email" placeholder="Email" id="email" class="form-control rounded-0 bg-dark text-white"/>
+      </div>
+
+      <div>
+        <label for="password">Escribe una Contraseña:</label>
+        <input type="password" name="password" placeholder="Contraseña" id="password" class="form-control rounded-0 bg-dark text-white"/>
+      </div>
+
+      <div>
+          <label>Selecciona los Roles:</label>
+          <input type="checkbox" name="roles" value="user" id="userRole">
+          <label for="userRole">Usuario</label>
+          <input type="checkbox" name="roles" value="admin" id="adminRole">
+          <label for="adminRole">Administrador</label>
+      </div>
+
+
+      
+
+      <button class=" btn btn-primary btn-sm mt-2">Agregar</button>
+
+    </form>
+</div>

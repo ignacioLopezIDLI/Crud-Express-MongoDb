@@ -4,10 +4,10 @@ import { authJwt, verifyToken } from "../middlewares"
 const router = Router() 
 
 // Ruta GET  Traer Tareas
-router.get("/",renderTask)
+router.get("/",authJwt.verifyToken,renderTask)
 
 // Ruta POST Hacer tareas
-router.post("/tasks/add",createTask)
+router.post("/tasks/add",authJwt.verifyToken,createTask)
 
 // Editar 1 Buscar info 
 router.get("/tasks/:id/edit",authJwt.verifyToken, renderTaskEdit)
@@ -16,11 +16,11 @@ router.get("/tasks/:id/edit",authJwt.verifyToken, renderTaskEdit)
 router.post("/tasks/:id/edit",authJwt.verifyToken, updateTask)
 
 // Eliminar 
-router.get("/tasks/:id/delete",[authJwt.verifyToken,authJwt.isAdmin], deleteTask)
+router.get("/tasks/:id/delete",authJwt.verifyToken,authJwt.isAdmin, deleteTask)
 
 // Cambiar estado de Tareas
 
-router.get("/tasks/:id/toggleDone",updateDoneTask )
+router.get("/tasks/:id/toggleDone",authJwt.verifyToken,updateDoneTask )
 
 
 export default router

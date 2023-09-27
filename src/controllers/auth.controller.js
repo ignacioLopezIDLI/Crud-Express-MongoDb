@@ -30,6 +30,7 @@ export const signup = async (req,res) =>{
     const token = jwt.sign({id: savedUser.id}, SECRET, {
         expiresIn: 86400 // 24Horas
     } )
+    req.session.token = token; 
 
     
     res.status(200).json({token})
@@ -51,6 +52,16 @@ export const signin = async (req,res) =>{
         expiresIn: 86400    
     })
 
-    res.json({token})
+    req.session.token = token;
+    
+    res.json({token}) 
+    
 
+}
+
+
+// Ruta para renderizar Login
+export const renderLogin1 = async(req,res)=>{
+    
+    res.render("userLogin1") // Da info de BD para renderizar 
 }

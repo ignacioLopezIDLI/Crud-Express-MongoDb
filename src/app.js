@@ -8,11 +8,19 @@ import { createRoles } from './libs/initialSetup';
 import { create } from 'express-handlebars';
 import morgan from "morgan"
 import userRoutes from "./routes/user.routes"
+import session from 'express-session'
 
 
 // Inicializo APP 
 const app = express();
 createRoles()
+
+// Configurar sesión
+app.use(session({
+    secret: 'miclavesecreta', 
+    resave: false,
+    saveUninitialized: false
+  }));
 
 // Set Babel
 app.set('views', path.join(__dirname, '/views'));
@@ -40,8 +48,8 @@ app.use(express.json()) // Analizar el cuerpo de la solicitud en formato JSON
 
 // Rutas
 app.use(indexRoutes)
-app.use("/auth", authRoutes)
-app.use("/user",userRoutes)
+app.use(authRoutes)
+app.use(userRoutes)
 
 // Archivos estaticos
 

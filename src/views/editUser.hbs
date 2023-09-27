@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 offset-md-3">
+      <div class="card card-body bg-dark p-4 text-white rounded-0">
+
+        <h3>Actualiza el Usuario</h3>
+
+        <form action="/user/{{user._id}}/edit" method="POST">
+          <div class="mb-3">
+            <input
+              class="form-control rounded-0 bg-dark text-white"
+              type="text"
+              name="username"
+              placeholder="Usuario"
+              value="{{user.username}}"
+            />
+          </div>
+
+          <div class="mb-3">
+            <textarea
+              class="form-control rounded-0 bg-dark text-white"
+              name="email"
+              rows="3"
+              placeholder="Email"
+            > {{user.email}} </textarea>
+          </div>
+
+          <button class="btn btn-primary">Actualizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
