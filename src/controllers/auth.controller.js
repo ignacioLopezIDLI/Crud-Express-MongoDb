@@ -2,6 +2,7 @@ import User from "../models/User"
 import {SECRET} from "../config"
 import jwt  from "jsonwebtoken"
 import Role from "../models/Role"
+import { renderTask } from "./task.controller"
 
 // Registrar user
 export const signup = async (req,res) =>{
@@ -52,9 +53,8 @@ export const signin = async (req,res) =>{
         expiresIn: 86400    
     })
 
-    req.session.token = token;
-    
-    res.json({token}) 
+
+    renderTask(req,res)
     
 
 }

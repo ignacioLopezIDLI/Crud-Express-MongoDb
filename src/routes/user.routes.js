@@ -17,7 +17,7 @@ router.post("/",[
 
 // Ruta GET Render User
 
-router.get("/user",authJwt.verifyToken,userCtrl.renderUser)
+router.get("/user",authJwt.verifyToken,authJwt.isAdmin,userCtrl.renderUser)
 
 
 // Ruta Eliminar Usuario 
