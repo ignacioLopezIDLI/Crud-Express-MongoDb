@@ -7,8 +7,9 @@ import cookieParser from "cookie-parser"
 
 // Registrar user
 export const signup = async (req,res) =>{
-    const {username, email , password , roles} = req.body
+    const {username, email , password , userRole, adminRole} = req.body
     
+     
     const newUser = new User({
         username,
         email,
@@ -17,14 +18,25 @@ export const signup = async (req,res) =>{
 
     
     // Asignar Roles roles existe - consulta BD $in - name == con roles
-    if  (roles){
-       const foundRoles =  await Role.find({name: {$in: roles }})
-       newUser.roles = foundRoles.map(role => role._id)  // busco los id y los asigno al new user
+    if (userRole && adminRole) {
+        // Ambos checkboxes están marcados
+        // Asigna ambos roles
+        const userRole = await Role.findOne({ name: "user" });
+        const adminRole = await Role.findOne({ name: "admin" });
+        newUser.roles = [userRole._id, adminRole._id];
+    } else if (userRole) {
+        // Solo el checkbox de Usuario está marcado
+        const userRole = await Role.findOne({ name: "user" });
+        newUser.roles = [userRole._id];
+    } else if (adminRole) {
+        // Solo el checkbox de Administrador está marcado
+        const adminRole = await Role.findOne({ name: "admin" });
+        newUser.roles = [adminRole._id];
     } else {
-        const role = await Role.findOne({name:"user"}) // consulto a BD el rol user
-        newUser.roles = [role._id]                  // Asigno rol
+        // Ningún checkbox está marcado, asigna el rol de usuario por defecto
+        const defaultRole = await Role.findOne({ name: "user" });
+        newUser.roles = [defaultRole._id];
     }
-
     const savedUser =  await newUser.save()
     console.log(savedUser)
 
