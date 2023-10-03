@@ -9,6 +9,7 @@ import { create } from 'express-handlebars';
 import morgan from "morgan"
 import userRoutes from "./routes/user.routes"
 import session from 'express-session'
+import cookieParser from 'cookie-parser';
 
 
 // Inicializo APP 
@@ -45,6 +46,7 @@ app.set("view engine", ".hbs");
 app.use(morgan("dev")) // Ver Peticiones
 app.use(express.urlencoded({extended: false})) // Permite usar elementos del req.body 
 app.use(express.json()) // Analizar el cuerpo de la solicitud en formato JSON
+app.use(cookieParser())
 
 // Rutas
 app.use(indexRoutes)
