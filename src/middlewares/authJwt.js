@@ -6,7 +6,7 @@ import Role from "../models/Role"
 
 export const  verifyToken = async (req, res, next) => {
     try {
-        const token  = req.headers["x-access-token"]
+        const token  = req.cookies.jwt  // Extraer el token de la cookie
     
         if(!token) return res.status(403).json ({message :" Sin Token asignado "})
 
@@ -37,3 +37,17 @@ export const isAdmin = async (req, res, next) => {
     return res.status(403).json({message:"Requiere Ser Administrador"})
     
 }
+
+
+
+ export const cokieParser1 = (req,res,next) =>{
+    try {
+        const token = req.cookies.jwt
+        const validPayload = Jwt.verify(token, process.env.SECRET)
+        console.log(123);
+        console.log(validPayload)
+        next()
+    } catch (error) {
+        res.status(401).json({ok:false,message:"Invalid TOKEN"})
+    }
+ }

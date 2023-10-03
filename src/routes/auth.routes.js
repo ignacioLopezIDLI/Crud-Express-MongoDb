@@ -8,7 +8,7 @@ import { verifySignup } from "../middlewares"
 router.post("/signup",[verifySignup.checkDuplicateUsernameOrEmail,verifySignup.checkRolesExisted], authCtrl.signup)
 
 // Ruta para Iniciar Sesion 
-router.post("/signin",authCtrl.signin)
+router.post("/signin",authCtrl.login)
 
 // Ruta para Renderizar Login
 router.get("/signin",authCtrl.renderLogin1)
