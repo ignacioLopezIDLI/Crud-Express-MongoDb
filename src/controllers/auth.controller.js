@@ -3,20 +3,19 @@ import {SECRET} from "../config"
 import jwt  from "jsonwebtoken"
 import Role from "../models/Role"
 import { renderTask } from "./task.controller"
+import userCtrl, { renderUser } from "./user.controller"
 import cookieParser from "cookie-parser"
 
 // Registrar user
 export const signup = async (req,res) =>{
     const {username, email , password , userRole, adminRole} = req.body
     
-     
     const newUser = new User({
         username,
         email,
         password: await User.encryptPassword(password)
     }) 
 
-    
     // Asignar Roles roles existe - consulta BD $in - name == con roles
     if (userRole && adminRole) {
         // Ambos checkboxes están marcados
@@ -46,8 +45,8 @@ export const signup = async (req,res) =>{
     } )
 
 
+    renderUser(req,res)
     
-    res.status(200).json({token})
 }
 
 // Login user
@@ -135,4 +134,12 @@ export const renderLogin1 = async(req,res)=>{
             })
         }
 
+    }
+
+
+export const logout = async function(req,res){
+        // Eliminar la cookie JWT
+        res.clearCookie('jwt');
+        // Redirigir al usuario a la página de inicio de sesión
+        res.render("userLogin1"); // Ajusta la ruta según tu configuración
     }

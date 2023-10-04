@@ -12,4 +12,8 @@ router.post("/signin",authCtrl.login)
 
 // Ruta para Renderizar Login
 router.get("/signin",authCtrl.renderLogin1)
+
+// Ruta para Cerrar sesión
+router.get("/logout",authCtrl.logout)
+
 export default router
