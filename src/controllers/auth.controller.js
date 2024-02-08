@@ -78,6 +78,10 @@ export const renderLogin1 = async(req,res)=>{
     res.render("userLogin1") // Da info de BD para renderizar 
 }
 
+// Ruta para renderizar signup
+export const renderSignup = async(req,res)=>{
+    res.render("userSignup")
+}
 
     // Ruta Login nueva 
 
